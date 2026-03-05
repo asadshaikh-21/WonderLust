@@ -15,7 +15,7 @@ const ExpressError = require("./utlis/ExpressError.js");
 const {listingSchema, reviewSchema} = require("./schema.js");
 const Review = require("./models/review.js");
 const session = require("express-session");
-const MongoStore = require("connect-mongo").default;
+const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -25,7 +25,7 @@ const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 const atlas_url = process.env.ATLAS_URL;
 
@@ -50,8 +50,8 @@ async function main() {
   await mongoose.connect(atlas_url);
 }
 
-app.listen(port,()=>{
-    console.log("App is listining !");
+app.listen(port, () => {
+  console.log(`App is listening on port ${port}`);
 });
 
 const store = MongoStore.create({
@@ -62,7 +62,7 @@ const store = MongoStore.create({
   touchAfter: 24 * 3600,
 });
 
-store.on("error", () => {
+store.on("error", (err) => {
   console.log("SESSION STORE ERROR", err);
 });
 
