@@ -1,0 +1,95 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-9">
+
+      <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+        <div class="row g-0">
+          
+          <!-- Left: Profile -->
+          <div class="col-md-4 p-4 text-center bg-light">
+            <img
+              src="https://avatars.githubusercontent.com/u/9919?s=200&v=4"
+              alt="profile"
+              class="rounded-circle img-fluid mb-3"
+              style="width:140px;height:140px;object-fit:cover;"
+            />
+
+            <h3 class="mb-1">Asad Shaikh</h3>
+            <p class="text-muted mb-3">Full-Stack Developer • MERN</p>
+            <p class="text-muted mb-3">shaikhasadimam@gmail.com</p>
+
+            <div class="d-grid gap-2">
+              <a class="btn btn-dark" href="/listings">Explore Listings</a>
+              <a class="btn btn-outline-dark" href="/listings/new">Add a Listing</a>
+            </div>
+
+            <hr class="my-4">
+            <div class="d-flex justify-content-center gap-3">
+              <a href="https://github.com/asadshaikh-21" target="_blank" class="text-decoration-none">
+                <i class="fa-brands fa-github fs-3"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/asad-shaikh-9677522a2/" target="_blank" class="text-decoration-none">
+                <i class="fa-brands fa-linkedin fs-3"></i>
+              </a>
+              <a href="mailto:shaikhasadimam@gmail.com" class="text-decoration-none">
+                <i class="fa-solid fa-envelope fs-3"></i>
+              </a>
+            </div>
+
+            <p class="text-muted mt-3 mb-0 small">
+            </p>
+          </div>
+
+          <!-- Right: Project info -->
+          <div class="col-md-8 p-4 p-md-5">
+            <h1 class="mb-3">About WonderLust</h1>
+
+            <p class="lead">
+              WonderLust is a full-stack web application inspired by Airbnb.
+              Users can browse listings, view a live map location, and add reviews.
+            </p>
+
+            <div class="mt-4">
+              <h5 class="mb-3">Key Features</h5>
+              <ul class="mb-0">
+                <li>Authentication (Signup/Login/Logout)</li>
+                <li>Create, edit, delete listings (owner-only permissions)</li>
+                <li>Image upload support</li>
+                <li>Reviews with ratings</li>
+                <li>Interactive map using Leaflet + OpenStreetMap</li>
+                <li>Flash messages and validation</li>
+              </ul>
+            </div>
+
+            <div class="mt-4">
+              <h5 class="mb-3">Tech Stack</h5>
+              <div class="d-flex flex-wrap gap-2">
+                <span class="badge text-bg-dark">Node.js</span>
+                <span class="badge text-bg-dark">Express</span>
+                <span class="badge text-bg-dark">MongoDB</span>
+                <span class="badge text-bg-dark">Mongoose</span>
+                <span class="badge text-bg-dark">EJS</span>
+                <span class="badge text-bg-dark">Bootstrap</span>
+                <span class="badge text-bg-dark">Passport.js</span>
+                <span class="badge text-bg-dark">Leaflet</span>
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <h5 class="mb-3">Why I built this</h5>
+              <p class="mb-0">
+                I built this project to demonstrate real-world full-stack skills: routing,
+                authentication, database design, CRUD operations, and clean UI using Bootstrap.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

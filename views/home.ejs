@@ -1,0 +1,61 @@
+<% layout("layouts/boilerplate.ejs") %>
+
+<div class="container py-5">
+  <div class="row align-items-center g-5">
+    <div class="col-lg-6">
+      <h1 class="display-5 fw-bold">WonderLust</h1>
+      <p class="lead mt-3">
+        Find unique stays and experiences. Explore listings, view locations on a live map,
+        and share reviews — all in one place.
+      </p>
+
+        <div class="d-flex gap-2 mt-4">
+  <a href="/listings" class="btn btn-dark btn-lg">Explore Listings</a>
+  <a href="/listings/new" class="btn btn-outline-dark btn-lg">Add a Listing</a>
+  <a href="/about" class="btn btn-outline-dark btn-lg">About Me!</a>
+</div>
+
+      <div class="mt-4 text-muted">
+        Built with Node.js, Express, MongoDB, EJS, Bootstrap & Leaflet Maps.
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+        <img
+          class="img-fluid"
+          style="height: 360px; width: 100%; object-fit: cover;"
+          src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=60"
+          alt="Travel"
+        />
+      </div>
+
+      <div class="row g-3 mt-3">
+        <div class="col-6">
+          <div class="p-3 border rounded-4 bg-light">
+            <div class="fw-semibold">Discover</div>
+            <div class="text-muted small">Browse stays with details & images</div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="p-3 border rounded-4 bg-light">
+            <div class="fw-semibold">Map</div>
+            <div class="text-muted small">View listing location instantly</div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="p-3 border rounded-4 bg-light">
+            <div class="fw-semibold">Reviews</div>
+            <div class="text-muted small">Rate & comment on listings</div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="p-3 border rounded-4 bg-light">
+            <div class="fw-semibold">Secure</div>
+            <div class="text-muted small">Auth + ownership controls</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
