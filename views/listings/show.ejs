@@ -10,7 +10,7 @@
         <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing-img">
         <div class="card-body">
             <p class="card-text">
-                <b>Owned By <i><%= listing.owner.username %></i></b>
+                <b>Owned By <i><%= listing.owner ? listing.owner.username : "Asad" %></i></b>
             </p>
             <p class="card-text">
                 <%= listing.description %>
@@ -28,7 +28,7 @@
     </div>
 
     <!-- Buttons -->
-    <% if(CurrentUser && listing.owner._id.equals(CurrentUser.id)){ %>
+    <% if(CurrentUser && listing.owner && listing.owner._id && listing.owner._id.equals(CurrentUser._id)){ %>
     <div class="col-6 offset-3 mt-3">
         <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark">Edit</a>
 

@@ -34,14 +34,33 @@ isOwner,wrapAsync(listingController.updateForm)
 router.delete("/:id",isLoggedin,isOwner,wrapAsync(listingController.deleteForm)
 );
 
-// Create route
-router.post("/", isLoggedin, 
-    upload.single("listing[image]") ,
-    validateListing ,wrapAsync(listingController.createListing)
-);
+
+// router.post("/", isLoggedin, 
+//     upload.single("listing[image]") ,
+//     validateListing ,wrapAsync(listingController.createListing)
+// );
  
 //Show Route
 router.get("/:id",wrapAsync(listingController.showListing)
+);
+
+// Create route
+router.post(
+  "/",
+  isLoggedin,
+  (req, res, next) => {
+    console.log("LISTING STEP 1: route hit");
+    next();
+  },
+  upload.single("listing[image]"),
+  (req, res, next) => {
+    console.log("LISTING STEP 2: after upload");
+    console.log("BODY:", req.body);
+    console.log("FILE:", req.file);
+    next();
+  },
+  validateListing,
+  wrapAsync(listingController.createListing)
 );
 
 module.exports = router;

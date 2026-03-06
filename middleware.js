@@ -3,25 +3,38 @@ const Review = require("./models/review.js");
 const ExpressError = require("./utlis/ExpressError.js");
 const { listingSchema, reviewSchema } = require("./schema.js");
 
+// module.exports.validateListing = (req, res, next) => {
+//   let { error } = listingSchema.validate(req.body);
+//   if (error) {
+//     let errMsg = error.details.map((el) => el.message).join(",");
+//     throw new ExpressError(400, errMsg);
+//   } else {
+//     next();
+//   }
+// };
+
 module.exports.validateListing = (req, res, next) => {
-  let { error } = listingSchema.validate(req.body);
-  if (error) {
-    let errMsg = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(400, errMsg);
-  } else {
-    next();
-  }
+    console.log("VALIDATE LISTING BODY:", req.body);
+
+    let { error } = listingSchema.validate(req.body);
+    if (error) {
+        console.log("JOI LISTING ERROR:", error.details);
+        let errMsg = error.details.map((el) => el.message).join(", ");
+        return next(new ExpressError(400, errMsg));
+    } else {
+        next();
+    }
 };
 
 // Validate review
 module.exports.validateReview = (req, res, next) => {
-  let { error } = reviewSchema.validate(req.body);
-  if (error) {
-    let errMsg = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(400, errMsg);
-  } else {
-    next();
-  }
+    let { error } = reviewSchema.validate(req.body);
+    if (error) {
+        let errMsg = error.details.map((el) => el.message).join(",");
+        throw new ExpressError(400, errMsg);
+    } else {
+        next();
+    }
 };
 
 module.exports.isLoggedin = (req, res, next) => {

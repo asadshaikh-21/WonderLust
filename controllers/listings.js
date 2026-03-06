@@ -46,24 +46,33 @@ module.exports.deleteForm = async(req,res)=>{
         res.redirect("/listings");
     }
 
-module.exports.createListing = async(req,res,next)=>{
-    let url = req.file.path;
-    let filename = req.file.filename;
+module.exports.createListing = async (req, res, next) => {
     const place = `${req.body.listing.location}, ${req.body.listing.country}`;
     const coords = await geocodeOSM(place);
+
     const newlisting = new Listing(req.body.listing);
     newlisting.owner = req.user._id;
-    newlisting.image = {url,filename};
-    if(coords){
-        newlisting.geometry = {
-            type: "Point",
-            coordinates: [coords.lng, coords.lat]
+
+    if (req.file) {
+        newlisting.image = {
+            url: req.file.path,
+            filename: req.file.filename,
         };
     }
+
+    if (coords) {
+        newlisting.geometry = {
+            type: "Point",
+            coordinates: [coords.lng, coords.lat],
+        };
+    }
+    console.log("BODY:", req.body);
+    console.log("FILE:", req.file);
+
     await newlisting.save();
-    req.flash("success","New Listing created SuccessFully!");
-    res.redirect("/listings");
-}
+    req.flash("success", "New Listing created successfully!");
+    res.redirect(`/listings/${newlisting._id}`);
+};
 
 module.exports.showListing = async(req,res)=>{
         let {id} = req.params;
@@ -79,3 +88,6 @@ module.exports.showListing = async(req,res)=>{
         console.log(listing);
         res.render("listings/show.ejs",{listing});
     }
+
+
+    

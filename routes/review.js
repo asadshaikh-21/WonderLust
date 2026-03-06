@@ -11,8 +11,18 @@ const {validateReview} = require("../middleware.js");
 const {isLoggedin,isReviewAuthor} = require("../middleware.js");
 const reviewController = require("../controllers/reviews.js");
 
+console.log("isLoggedin:", typeof isLoggedin);
+console.log("validateReview:", typeof validateReview);
+console.log("wrapAsync:", typeof wrapAsync);
+console.log("createReview:", typeof reviewController.createReview);
+
 // Create review
-router.post("/", validateReview,isLoggedin, wrapAsync(reviewController.createReview));
+router.post(
+  "/",
+  isLoggedin,
+  validateReview,
+  wrapAsync(reviewController.createReview)
+);
 
 // Delete Review
 router.delete("/:reviewId",isLoggedin,isReviewAuthor,wrapAsync(reviewController.deleteReview));
