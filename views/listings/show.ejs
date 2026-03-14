@@ -7,10 +7,14 @@
     </div>
 
     <div class="card col-6 offset-3 show-card listing-card">
-        <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing-img">
+        <img
+          src="<%= listing.image && listing.image.url ? listing.image.url : 'https://via.placeholder.com/800x400?text=No+Image' %>"
+          class="card-img-top show-img"
+          alt="listing-img"
+        >
         <div class="card-body">
             <p class="card-text">
-                <b>Owned By <i><%= listing.owner ? listing.owner.username : "Asad" %></i></b>
+                <b>Owned By <i><%= listing.owner?.username || "Asad" %></i></b>
             </p>
             <p class="card-text">
                 <%= listing.description %>
@@ -27,35 +31,43 @@
         </div>
     </div>
 
-    <!-- Buttons -->
-    <% if(CurrentUser && listing.owner && listing.owner._id && listing.owner._id.equals(CurrentUser._id)){ %>
+    <% if (CurrentUser && listing.owner && listing.owner._id && listing.owner._id.equals(CurrentUser._id)) { %>
     <div class="col-6 offset-3 mt-3">
         <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark">Edit</a>
 
-        <form method="post"
-              action="/listings/<%= listing._id %>?_method=DELETE"
-              class="d-inline">
+        <form
+          method="POST"
+          action="/listings/<%= listing._id %>?_method=DELETE"
+          class="d-inline"
+        >
             <button class="btn btn-danger">Delete</button>
         </form>
     </div>
     <% } %>
 
-    <% if(CurrentUser){ %>
-    <!-- Review Form -->
+    <% if (CurrentUser) { %>
     <div class="col-6 offset-3 mb-3">
         <hr>
         <h3>Give a review!</h3>
 
-        <form action="/listings/<%= listing._id %>/reviews"
-              method="POST"
-              novalidate
-              class="needs-validation">
-
+        <form
+          action="/listings/<%= listing._id %>/reviews"
+          method="POST"
+          novalidate
+          class="needs-validation"
+        >
             <div class="mb-3 mt-3">
                 <label class="form-label">Rating</label>
                 <fieldset class="starability-fade">
-                    <input type="radio" id="no-rate" class="input-no-rate"
-                           name="review[rating]" value="1" checked aria-label="No rating." />
+                    <input
+                      type="radio"
+                      id="no-rate"
+                      class="input-no-rate"
+                      name="review[rating]"
+                      value="1"
+                      checked
+                      aria-label="No rating."
+                    />
 
                     <input type="radio" id="rate1" name="review[rating]" value="1" />
                     <label for="rate1" title="Terrible">1 star</label>
@@ -85,36 +97,37 @@
     </div>
     <% } %>
 
-    <!-- All Reviews -->
-     <% if(listing.reviews.length > 0) {%>
+    <% if (listing.reviews.length > 0) { %>
     <div class="col-6 offset-3 mb-3">
         <hr>
         <div class="row">
             <p><b>All Reviews</b></p>
-        <% for(let review of listing.reviews) { %>
+            <% for (let review of listing.reviews) { %>
             <div class="card col-5 ms-3 mb-3">
                 <div class="card-body">
-                    <h5 class="card-title">@<%= review.author.username %></h5>
+                    <h5 class="card-title">@<%= review.author?.username || "Anonymous" %></h5>
                     <p class="starability-result" data-rating="<%= review.rating %>">Rated stars</p>
                     <p class="card-text"><%= review.comment %></p>
                 </div>
 
-                <form class="mb-3"
-                      method="POST"
-                      action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                <% if (CurrentUser && review.author && review.author._id && review.author._id.equals(CurrentUser._id)) { %>
+                <form
+                  class="mb-3"
+                  method="POST"
+                  action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+                >
                     <button class="btn btn-sm btn-dark mt-3">Delete</button>
                 </form>
+                <% } %>
             </div>
-        <% } %>
+            <% } %>
         </div>
     </div>
     <% } %>
-    <div  class="col-6 offset-3 mb-3">
+
+    <div class="col-6 offset-3 mb-3">
         <h2>Where you'll be</h2>
-        <div id="map">
-
-        </div>
-
+        <div id="map"></div>
     </div>
 </div>
 
@@ -124,11 +137,9 @@
 
     const coords = "<%- JSON.stringify(listing.geometry?.coordinates || []) %>";
 
-    // coords must be [lng, lat]
     const lng = Number(coords[0]);
     const lat = Number(coords[1]);
 
-    // fallback if invalid
     const finalLat = Number.isFinite(lat) ? lat : 19.0760;
     const finalLng = Number.isFinite(lng) ? lng : 72.8777;
 

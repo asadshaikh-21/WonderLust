@@ -7,6 +7,9 @@ const data = [
       url: "https://res.cloudinary.com/dmbrzaioz/image/upload/v1772780269/wonderLust_DEV/iui8us0cahgd2kwi6oue.jpg",
       filename: "wonderLust_DEV/iui8us0cahgd2kwi6oue",
     },
+    owner:{
+      username:""
+    },
     price: 11001,
     location: "Aurangabad",
     country: "India",
