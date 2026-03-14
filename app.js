@@ -10,12 +10,13 @@ if (!process.env.SECRET) {
     throw new Error("SECRET is missing in environment variables");
 }
 
+const express = require("express");
+const app = express();
+
 if(process.env.NODE_ENV === "production"){
     app.set("trust proxy", 1);
 }
 
-const express = require("express");
-const app = express();
 const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
